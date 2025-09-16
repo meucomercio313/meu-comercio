@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-brand-dark text-white bg-no-repeat bg-cover bg-center;
+    background-image: url('/background.png');
+} }
