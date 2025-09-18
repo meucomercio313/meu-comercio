@@ -1,9 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-brand-dark text-white bg-no-repeat bg-cover bg-center;
-    background-image: url('/background.png');
-} }
+        @layer base {
+          :root {
+            --background: 240 10% 3.9%;
+            --foreground: 0 0% 98%;
+            --primary: 84 100% 50%;
+            --primary-foreground: 240 10% 3.9%;
+            --border: 240 3.7% 15.9%;
+            --input: 240 3.7% 15.9%;
+            --ring: 84 100% 50%;
+            --radius: 0.5rem;
+          }
+
+          body {
+            @apply bg-brand-dark text-white bg-no-repeat bg-cover bg-center;
+            background-image: url('/background.png');
+          }
+        }

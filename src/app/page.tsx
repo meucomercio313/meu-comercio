@@ -5,6 +5,8 @@ import { Stats } from '@/components/landing/Stats';
 export default function HomePage() {
   return (
     <main>
+      <Header />
       <Hero />
+      <Stats />
     </main>
 ); }

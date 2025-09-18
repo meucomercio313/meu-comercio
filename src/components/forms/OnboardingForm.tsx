@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { OnboardingFormSchema, OnboardingFormValues } from '@/lib/types';
 import { submitOnboardingForm } from '@/lib/actions';
@@ -19,7 +19,7 @@ export function OnboardingForm() {
     handleSubmit,
     formState: { errors },
     watch,
-    control, // para o Select
+    control,
   } = useForm<OnboardingFormValues>({
     resolver: zodResolver(OnboardingFormSchema),
   });
@@ -32,12 +32,10 @@ export function OnboardingForm() {
     setIsSubmitting(false);
 
     if (result.success) {
-      alert(result.message); // Idealmente, substitua por um toast/notificação
-      // Resetar form ou fechar modal aqui
-    } else {
       alert(result.message);
-    }
-  };
+    } else {
+      alert(result.message || "Ocorreu um erro.");
+  } };
 
   return (
     <div className="bg-brand-dark/80 backdrop-blur-sm border border-brand-green/20 p-8 rounded-lg max-w-lg w-full">
@@ -52,10 +50,65 @@ export function OnboardingForm() {
           {errors.companyName && <p className="text-red-500 text-sm mt-1">{errors.companyName.message}</p>}
         </div>
 
-        {/* ... Adapte os Selects para usar react-hook-form's Controller ... */}
+        <div>
+          <Label>Quanto você quer investir em marketing digital? *</Label>
+          <Controller
+            control={control}
+            name="investmentValue"
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <SelectTrigger><SelectValue placeholder="Selecione o valor" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="1k-5k">R$1.000 - R$5.000</SelectItem>
+                  <SelectItem value="5k-10k">R$5.000 - R$10.000</SelectItem>
+                  <SelectItem value="10k+">Acima de R$10.000</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
+          {errors.investmentValue && <p className="text-red-500 text-sm mt-1">{errors.investmentValue.message}</p>}
+        </div>
 
         <div>
-          <Label htmlFor="marketingGoals">O que você gostaria de melhorar no marketing da sua empresa? *</Label>
+          <Label>Você já investiu em marketing digital antes? *</Label>
+           <Controller
+            control={control}
+            name="hasInvestedBefore"
+            render={({ field }) => (
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <SelectTrigger><SelectValue placeholder="Selecione uma opção" /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="true">Sim</SelectItem>
+                  <SelectItem value="false">Não</SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
+          {errors.hasInvestedBefore && <p className="text-red-500 text-sm mt-1">{errors.hasInvestedBefore.message}</p>}
+        </div>
+
+        {hasInvested === 'true' && (
+          <div>
+            <Label>Teve resultados satisfatórios? *</Label>
+             <Controller
+              control={control}
+              name="wasSatisfied"
+              render={({ field }) => (
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <SelectTrigger><SelectValue placeholder="Selecione uma opção" /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="true">Sim</SelectItem>
+                    <SelectItem value="false">Não</SelectItem>
+                  </SelectContent>
+                </Select>
+              )}
+            />
+             {errors.wasSatisfied && <p className="text-red-500 text-sm mt-1">{errors.wasSatisfied.message}</p>}
+          </div>
+        )}
+
+        <div>
+          <Label htmlFor="marketingGoals">O que você gostaria de melhorar no marketing da sua empresa?</Label>
           <Textarea id="marketingGoals" {...register('marketingGoals')} placeholder="Descreva suas principais necessidades e objetivos..." />
           {errors.marketingGoals && <p className="text-red-500 text-sm mt-1">{errors.marketingGoals.message}</p>}
         </div>
