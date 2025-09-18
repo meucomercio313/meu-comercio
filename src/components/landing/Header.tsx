@@ -14,18 +14,18 @@ export function Header() {
     <header className="py-4 px-4 md:px-6 sticky top-0 z-50 bg-brand-dark/80 backdrop-blur-lg">
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo.jpg" alt="Meu Comércio Logo" width={40} height={40} className="rounded-md" />
-          <span className="font-bold text-lg hidden sm:inline">Meu Comércio</span>
+          <Image src="/logo.jpg" alt="Meu Comércio Logo" width={120} height={120} className="rounded-md" />
+          <span className="font-bold text-lg hidden sm:inline"></span>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
+            <Link key={link.href} href={link.href} className="text-md font-medium text-gray-300 hover:text-white transition-colors">
               {link.label}
             </Link>
           ))}
         </nav>
         <Button className="hidden md:flex">
-          Decolar Agora
+          🚀 Decolar Agora
         </Button>
       </div>
     </header>
