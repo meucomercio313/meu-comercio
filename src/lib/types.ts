@@ -9,3 +9,13 @@ export const OnboardingFormSchema = z.object({
 });
 
 export type OnboardingFormValues = z.infer<typeof OnboardingFormSchema>;
+
+export type Lead = {
+  id: string;
+  company_name: string;
+  investment_value: string;
+  has_invested_before: boolean;
+  was_satisfied: boolean | null;
+  marketing_goals: string | null;
+  created_at: string;
+};

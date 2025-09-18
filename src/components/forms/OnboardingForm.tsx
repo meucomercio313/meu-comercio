@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
+import { DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 export function OnboardingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,21 +36,24 @@ export function OnboardingForm() {
       alert(result.message);
     } else {
       alert(result.message || "Ocorreu um erro.");
-  } };
+    }
+  };
 
   return (
     <div className="bg-brand-dark/80 backdrop-blur-sm border border-brand-green/20 p-8 rounded-lg max-w-lg w-full">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-brand-green">Decolagem Digital</h2>
-        <p className="text-gray-300 mt-2">Transforme seu negócio em uma máquina de vendas espacial!</p>
-      </div>
+      <DialogHeader className="text-center mb-8">
+        <DialogTitle className="text-3xl font-bold text-brand-green">Decolagem Digital</DialogTitle>
+        <DialogDescription className="text-gray-300 mt-2">
+          Transforme seu negócio em uma máquina de vendas espacial!
+        </DialogDescription>
+      </DialogHeader>
+
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
           <Label htmlFor="companyName">Nome da sua empresa *</Label>
           <Input id="companyName" {...register('companyName')} placeholder="Digite o nome da sua empresa" />
           {errors.companyName && <p className="text-red-500 text-sm mt-1">{errors.companyName.message}</p>}
         </div>
-
         <div>
           <Label>Quanto você quer investir em marketing digital? *</Label>
           <Controller
@@ -68,7 +72,6 @@ export function OnboardingForm() {
           />
           {errors.investmentValue && <p className="text-red-500 text-sm mt-1">{errors.investmentValue.message}</p>}
         </div>
-
         <div>
           <Label>Você já investiu em marketing digital antes? *</Label>
            <Controller
@@ -86,7 +89,6 @@ export function OnboardingForm() {
           />
           {errors.hasInvestedBefore && <p className="text-red-500 text-sm mt-1">{errors.hasInvestedBefore.message}</p>}
         </div>
-
         {hasInvested === 'true' && (
           <div>
             <Label>Teve resultados satisfatórios? *</Label>
@@ -106,13 +108,11 @@ export function OnboardingForm() {
              {errors.wasSatisfied && <p className="text-red-500 text-sm mt-1">{errors.wasSatisfied.message}</p>}
           </div>
         )}
-
         <div>
           <Label htmlFor="marketingGoals">O que você gostaria de melhorar no marketing da sua empresa?</Label>
           <Textarea id="marketingGoals" {...register('marketingGoals')} placeholder="Descreva suas principais necessidades e objetivos..." />
           {errors.marketingGoals && <p className="text-red-500 text-sm mt-1">{errors.marketingGoals.message}</p>}
         </div>
-
         <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
           {isSubmitting ? 'Enviando...' : 'Iniciar Jornada Espacial'}
         </Button>
