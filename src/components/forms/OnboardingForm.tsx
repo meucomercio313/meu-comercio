@@ -36,11 +36,10 @@ export function OnboardingForm() {
       alert(result.message);
     } else {
       alert(result.message || "Ocorreu um erro.");
-    }
-  };
+  } };
 
   return (
-    <div className="bg-brand-dark/80 backdrop-blur-sm border border-brand-green/20 p-8 rounded-lg max-w-lg w-full">
+    <div className="bg-brand-dark/80 backdrop-blur-md shadow-lg shadow-brand-green/20 border border-brand-green/20 p-8 rounded-lg max-w-lg w-full">
       <DialogHeader className="text-center mb-8">
         <DialogTitle className="text-3xl font-bold text-brand-green">Decolagem Digital</DialogTitle>
         <DialogDescription className="text-gray-300 mt-2">
@@ -54,6 +53,7 @@ export function OnboardingForm() {
           <Input id="companyName" {...register('companyName')} placeholder="Digite o nome da sua empresa" />
           {errors.companyName && <p className="text-red-500 text-sm mt-1">{errors.companyName.message}</p>}
         </div>
+
         <div>
           <Label>Quanto você quer investir em marketing digital? *</Label>
           <Controller
@@ -63,15 +63,17 @@ export function OnboardingForm() {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <SelectTrigger><SelectValue placeholder="Selecione o valor" /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="1k-5k">R$1.000 - R$5.000</SelectItem>
-                  <SelectItem value="5k-10k">R$5.000 - R$10.000</SelectItem>
-                  <SelectItem value="10k+">Acima de R$10.000</SelectItem>
+                  <SelectItem value="ate-5k">Até R$5.000/mês</SelectItem>
+                  <SelectItem value="5k-15k">De R$5.000 a R$15.000/mês</SelectItem>
+                  <SelectItem value="15k-30k">De R$15.000 a R$30.000/mês</SelectItem>
+                  <SelectItem value="acima-30k">Acima de R$30.000/mês</SelectItem>
                 </SelectContent>
               </Select>
             )}
           />
           {errors.investmentValue && <p className="text-red-500 text-sm mt-1">{errors.investmentValue.message}</p>}
         </div>
+
         <div>
           <Label>Você já investiu em marketing digital antes? *</Label>
            <Controller
@@ -81,15 +83,18 @@ export function OnboardingForm() {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <SelectTrigger><SelectValue placeholder="Selecione uma opção" /></SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="true">Sim</SelectItem>
-                  <SelectItem value="false">Não</SelectItem>
+                  <SelectItem value="nunca">Nunca investi</SelectItem>
+                  <SelectItem value="pouco">Investi pouco</SelectItem>
+                  <SelectItem value="moderadamente">Investi moderadamente</SelectItem>
+                  <SelectItem value="muito">Investi muito</SelectItem>
                 </SelectContent>
               </Select>
             )}
           />
           {errors.hasInvestedBefore && <p className="text-red-500 text-sm mt-1">{errors.hasInvestedBefore.message}</p>}
         </div>
-        {hasInvested === 'true' && (
+
+        {hasInvested && hasInvested !== 'nunca' && (
           <div>
             <Label>Teve resultados satisfatórios? *</Label>
              <Controller
@@ -99,8 +104,10 @@ export function OnboardingForm() {
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <SelectTrigger><SelectValue placeholder="Selecione uma opção" /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="true">Sim</SelectItem>
-                    <SelectItem value="false">Não</SelectItem>
+                    <SelectItem value="nao-se-aplica">Não se aplica</SelectItem>
+                    <SelectItem value="frustrantes">Não, foram frustrantes</SelectItem>
+                    <SelectItem value="parciais">Resultados parciais</SelectItem>
+                    <SelectItem value="otimos">Ótimos resultados</SelectItem>
                   </SelectContent>
                 </Select>
               )}
@@ -108,11 +115,13 @@ export function OnboardingForm() {
              {errors.wasSatisfied && <p className="text-red-500 text-sm mt-1">{errors.wasSatisfied.message}</p>}
           </div>
         )}
+
         <div>
           <Label htmlFor="marketingGoals">O que você gostaria de melhorar no marketing da sua empresa?</Label>
           <Textarea id="marketingGoals" {...register('marketingGoals')} placeholder="Descreva suas principais necessidades e objetivos..." />
           {errors.marketingGoals && <p className="text-red-500 text-sm mt-1">{errors.marketingGoals.message}</p>}
         </div>
+
         <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
           {isSubmitting ? 'Enviando...' : 'Iniciar Jornada Espacial'}
         </Button>
