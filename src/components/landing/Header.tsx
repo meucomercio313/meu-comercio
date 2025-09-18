@@ -28,7 +28,7 @@ export function Header() {
       <div className="container mx-auto flex justify-between items-center">
         <a href="#inicio" onClick={(e) => handleScroll(e, '#inicio')} className="flex items-center gap-2">
           <Image src="/logo.jpg" alt="Meu Comércio Logo" width={40} height={40} className="rounded-md" />
-          <span className="font-bold text-lg hidden sm:inline">Meu Comércio</span>
+          <span className="font-bold text-lg hidden sm:inline"></span>
         </a>
         <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
@@ -43,7 +43,7 @@ export function Header() {
           ))}
         </nav>
         <Button className="hidden md:flex">
-          Decolar Agora
+          🚀 Decolar Agora
         </Button>
       </div>
     </header>
