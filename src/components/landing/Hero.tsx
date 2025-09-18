@@ -6,7 +6,7 @@ import { OnboardingForm } from '../forms/OnboardingForm';
 
 export function Hero() {
   return (
-    <section className="container mx-auto flex flex-col items-center justify-center text-center min-h-[80vh] px-4">
+    <section id="inicio" className="container mx-auto flex flex-col items-center justify-center text-center min-h-[80vh] px-4">
       <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-tight">
         Decole Suas <span className="text-brand-green">VENDAS</span>
         <br />
