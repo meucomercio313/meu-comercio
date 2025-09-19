@@ -2,6 +2,8 @@ import { LeadsTable } from "@/components/admin/LeadsTable";
 import { supabase } from "@/lib/supabase";
 import { Lead } from "@/lib/types";
 
+export const dynamic = 'force-dynamic';
+
 async function getLeads(): Promise<Lead[]> {
   const { data, error } = await supabase
     .from('leads')
