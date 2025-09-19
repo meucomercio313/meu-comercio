@@ -14,8 +14,8 @@ export type Lead = {
   id: string;
   company_name: string;
   investment_value: string;
-  has_invested_before: boolean;
-  was_satisfied: boolean | null;
+  has_invested_before: string;
+  was_satisfied: string | null;
   marketing_goals: string | null;
   created_at: string;
 };

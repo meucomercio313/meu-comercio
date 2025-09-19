@@ -16,8 +16,8 @@ export async function submitOnboardingForm(data: OnboardingFormValues) {
     {
       company_name: companyName,
       investment_value: investmentValue,
-      has_invested_before: hasInvestedBefore === 'true',
-      was_satisfied: wasSatisfied ? wasSatisfied === 'true' : null,
+      has_invested_before: hasInvestedBefore,
+      was_satisfied: wasSatisfied || null,
       marketing_goals: marketingGoals,
   }, ]);
 
