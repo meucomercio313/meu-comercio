@@ -1,6 +1,10 @@
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin, ChevronRight, Rocket } from "lucide-react";
+import { handleScroll } from "@/lib/scroll";
+import React from "react";
 
 const servicesLinks = [
   { href: "#services", label: "Tráfego Pago" },
@@ -14,7 +18,6 @@ const quickLinks = [
   { href: "#inicio", label: "Início" },
   { href: "#servicos", label: "Serviços" },
   { href: "#depoimentos", label: "Depoimentos" },
-  { href: "#", label: "Sobre Nós" },
   { href: "#contact", label: "Contato" },
 ];
 
@@ -51,7 +54,7 @@ export function Footer() {
               </a>
               <div className="flex items-center gap-3">
                 <MapPin className="w-4 h-4 text-brand-green" />
-                <span>São Paulo, Brasil</span>
+                <span>Brasília, Brasil</span>
               </div>
             </div>
           </div>
@@ -75,10 +78,10 @@ export function Footer() {
             <ul className="space-y-2">
               {quickLinks.map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="flex items-center gap-2 text-gray-400 hover:text-brand-green transition-colors">
+                  <a href={link.href} onClick={(e) => handleScroll(e, link.href)} className="flex items-center gap-2 text-gray-400 hover:text-brand-green transition-colors">
                     <ChevronRight className="w-4 h-4 text-brand-green"/>
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -87,7 +90,7 @@ export function Footer() {
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
           <p className="flex items-center gap-2 mb-4 md:mb-0">
-            © {new Date().getFullYear()} MEU COMÉRCIO. Todos os direitos reservados. Feito com tecnologia espacial
+            © {new Date().getFullYear()} MEU COMÉRCIO. Todos os direitos reservados.
             <Rocket className="w-4 h-4 text-brand-green" />
           </p>
           <div className="flex items-center gap-6">

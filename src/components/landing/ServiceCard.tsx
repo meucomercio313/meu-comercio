@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, Check } from "lucide-react";
 import type { LucideIcon } from 'lucide-react';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { OnboardingForm } from '../forms/OnboardingForm';
 
 interface ServiceCardProps {
   icon: LucideIcon;
@@ -35,9 +37,16 @@ export function ServiceCard({ icon: Icon, title, description, features }: Servic
       </ul>
 
       <div className="mt-auto">
-        <Button variant="outline" className="w-full">
-          Saber Mais
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline" className="w-full">
+              Saber Mais
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="bg-transparent border-none p-0">
+            <OnboardingForm />
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
 ); }

@@ -1,6 +1,8 @@
 import { ServiceCard } from "./ServiceCard";
 import { Button } from "@/components/ui/button";
 import { Star, Target, Users, Code, ChartSpline, Mail, ArrowRight } from "lucide-react";
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { OnboardingForm } from '../forms/OnboardingForm';
 
 const servicesData = [
   {
@@ -42,7 +44,7 @@ const servicesData = [
 
 export function Services() {
   return (
-    <section id="services" className="py-20 px-4">
+    <section id="servicos" className="py-20 px-4">
       <div className="container mx-auto">
         <div className="text-center mb-12">
           <div className="flex justify-center mb-4">
@@ -73,10 +75,18 @@ export function Services() {
           <p className="text-gray-400 max-w-2xl mx-auto mb-8">
             Não perca mais tempo com estratégias que não funcionam. Decole para o sucesso hoje mesmo!
           </p>
-          <Button size="lg">
-            Iniciar Minha Jornada
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Button>
+          
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="lg">
+                Iniciar Minha Jornada
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="bg-transparent border-none p-0">
+              <OnboardingForm />
+            </DialogContent>
+          </Dialog>
         </div>
 
       </div>

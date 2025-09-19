@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { OnboardingForm } from '../forms/OnboardingForm';
+import { handleScroll } from '@/lib/scroll';
 
 export function Hero() {
   return (
@@ -24,7 +25,8 @@ export function Hero() {
             <OnboardingForm />
           </DialogContent>
         </Dialog>
-        <Button size="lg" variant="outline">
+
+        <Button size="lg" variant="outline" onClick={(e) => handleScroll(e, '#depoimentos')}>
           Ver Casos de Sucesso
         </Button>
       </div>
