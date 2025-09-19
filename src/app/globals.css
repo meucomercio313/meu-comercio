@@ -16,6 +16,6 @@
 
           body {
             @apply bg-brand-dark text-white bg-no-repeat bg-cover bg-center;
-            background-image: url('/background.png');
+            background-image: url('/background.jpg');
           }
         }

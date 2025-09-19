@@ -5,16 +5,25 @@ import { Hero } from '@/components/landing/Hero';
 import { Services } from '@/components/landing/Services';
 import { Stats } from '@/components/landing/Stats';
 import { Testimonials } from '@/components/landing/Testimonials';
+import { FadeIn } from '@/components/animations/FadeIn';
 
 export default function HomePage() {
   return (
     <main>
       <Header />
       <Hero />
-      <Stats />
-      <Services />
-      <Testimonials />
-      <Contact />
+      <FadeIn>
+        <Stats />
+      </FadeIn>
+      <FadeIn>
+        <Services />
+      </FadeIn>
+      <FadeIn>
+        <Testimonials />
+      </FadeIn>
+      <FadeIn>
+        <Contact />
+      </FadeIn>
       <Footer />
     </main>
 ); }

@@ -1,4 +1,4 @@
-'use client';
+'use client'; 
 
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -6,6 +6,8 @@ import React from 'react';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { OnboardingForm } from '../forms/OnboardingForm';
 import { handleScroll } from '@/lib/scroll';
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Menu } from 'lucide-react';
 
 const navLinks = [
   { href: '#inicio', label: 'Início' },
@@ -22,28 +24,53 @@ export function Header() {
           <Image src="/logo.jpg" alt="Meu Comércio Logo" width={120} height={120} className="rounded-md" />
           <span className="font-bold text-lg hidden sm:inline"></span>
         </a>
+
         <nav className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleScroll(e, link.href)}
-              className="text-sm font-medium text-gray-300 hover:text-white transition-colors"
-            >
+            <a key={link.href} href={link.href} onClick={(e) => handleScroll(e, link.href)} className="text-md font-medium text-gray-300 hover:text-white transition-colors">
               {link.label}
             </a>
           ))}
         </nav>
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button className="hidden md:flex">
-              🚀 Decolar Agora
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="bg-transparent border-none p-0">
-            <OnboardingForm />
-          </DialogContent>
-        </Dialog>
+
+        <div className="hidden md:flex">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button>🚀 Decolar Agora</Button>
+            </DialogTrigger>
+            <DialogContent className="bg-transparent border-none p-0"><OnboardingForm /></DialogContent>
+          </Dialog>
+        </div>
+
+        <div className="md:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="bg-brand-dark border-brand-green/20">
+              <SheetHeader>
+                <SheetTitle className="sr-only">Navegação Principal</SheetTitle>
+              </SheetHeader>
+              <nav className="flex flex-col gap-6 mt-10">
+                {navLinks.map((link) => (
+                  <SheetClose asChild key={link.href}>
+                    <a href={link.href} onClick={(e) => handleScroll(e, link.href)} className="text-lg font-medium text-gray-300 hover:text-white transition-colors">
+                      {link.label}
+                    </a>
+                  </SheetClose>
+                ))}
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button>🚀 Decolar Agora</Button>
+                  </DialogTrigger>
+                  <DialogContent className="bg-transparent border-none p-0"><OnboardingForm /></DialogContent>
+                </Dialog>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
 ); }

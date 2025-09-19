@@ -12,15 +12,24 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
 import { DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { Loader2 } from 'lucide-react';
+
+type FormStatus = {
+  message: string;
+  type: 'success' | 'error' | '';
+};
 
 export function OnboardingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<FormStatus>({ message: '', type: '' });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
     control,
+    reset,
   } = useForm<OnboardingFormValues>({
     resolver: zodResolver(OnboardingFormSchema),
   });
@@ -29,13 +38,17 @@ export function OnboardingForm() {
 
   const onSubmit = async (data: OnboardingFormValues) => {
     setIsSubmitting(true);
+    setStatus({ message: '', type: '' });
+
     const result = await submitOnboardingForm(data);
+
     setIsSubmitting(false);
 
     if (result.success) {
-      alert(result.message);
+      setStatus({ message: result.message || 'Enviado com sucesso!', type: 'success' });
+      reset();
     } else {
-      alert(result.message || "Ocorreu um erro.");
+      setStatus({ message: result.message || 'Ocorreu um erro.', type: 'error' });
   } };
 
   return (
@@ -123,8 +136,21 @@ export function OnboardingForm() {
         </div>
 
         <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-          {isSubmitting ? 'Enviando...' : 'Iniciar Jornada Espacial'}
+          {isSubmitting ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Enviando...
+            </>
+          ) : (
+            'Iniciar Jornada Espacial'
+          )}
         </Button>
+
+        {status.message && (
+          <p className={`text-sm text-center mt-4 ${status.type === 'success' ? 'text-green-400' : 'text-red-400'}`}>
+            {status.message}
+          </p>
+        )}
       </form>
     </div>
 ); }

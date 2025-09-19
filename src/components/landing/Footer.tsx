@@ -7,11 +7,11 @@ import { handleScroll } from "@/lib/scroll";
 import React from "react";
 
 const servicesLinks = [
-  { href: "#services", label: "Tráfego Pago" },
-  { href: "#services", label: "Gestão de Mídias Sociais" },
-  { href: "#services", label: "Criação de Software" },
-  { href: "#services", label: "Métricas e Analytics" },
-  { href: "#services", label: "E-mail Marketing" },
+  { href: "#servicos", label: "Tráfego Pago" },
+  { href: "#servicos", label: "Gestão de Mídias Sociais" },
+  { href: "#servicos", label: "Criação de Software" },
+  { href: "#servicos", label: "Métricas e Analytics" },
+  { href: "#servicos", label: "E-mail Marketing" },
 ];
 
 const quickLinks = [
@@ -64,10 +64,10 @@ export function Footer() {
             <ul className="space-y-2">
               {servicesLinks.map(link => (
                 <li key={link.label}>
-                  <Link href={link.href} className="flex items-center gap-2 text-gray-400 hover:text-brand-green transition-colors">
+                  <a href={link.href} onClick={(e) => handleScroll(e, link.href)} className="flex items-center gap-2 text-gray-400 hover:text-brand-green transition-colors">
                     <ChevronRight className="w-4 h-4 text-brand-green"/>
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
