@@ -1,6 +1,9 @@
 import React from 'react';
 
-export const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+export const handleScroll = (
+  e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
+  targetId: string
+) => {
   e.preventDefault();
   const targetElement = document.querySelector(targetId);
 
